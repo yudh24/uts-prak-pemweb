@@ -1,3 +1,6 @@
+<?php
+include "dbconnect.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,26 +49,38 @@
                 <hr style="margin-top: -1em;">
                 <ul style="margin-left: -0.5em;">
                     <li>
-                        <div>Training & Support Engineer</div>
-                        <div>2019 - Saat ini</div>
-                        <div>Job Desc :</div>
-                        <ul>
-                            <li>Mengajar</li>
-                            <li>Membuat Video Tutorial Jaringan</li>
-                            <li>Live Streaming Konsep Jaringan</li>
-                            <li>Menulis Artikel</li>
-                            <li>Research & Development</li>
-                            <li>Memberikan Support User</li>
-                            <li>Deploy & Maintenance Server</li>
-                        </ul>
+                        <?php
+                            $sql = "SELECT * FROM job";
+                            $result = $conn->query($sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                                echo $row['perusahaan']."<br>";
+                                echo $row['posisi']."<br>";
+                                echo $row['masa']."<br>";
+                                echo "<div>Job Desc :</div>";
+                                echo "<ul>";
+                                    $sql1 = "SELECT * FROM jobdesc WHERE idj=".$row['id'];
+                                    $result1 = $conn->query($sql1);
+
+                                    while ($row1 = $result1->fetch_assoc()) {
+                                        echo "<li>".$row1["joblist"]."</li>";
+                                    }
+                                echo "</ul>";
+                            }
+                        ?>
                     </li>
                 </ul>
                 <p style="font-size: 25px;">Education    :</p>
                 <hr style="margin-top: -1em;">
                 <ul style="margin-left: -0.5em;">
-                    <li>Universitas Mercubuana Yogyakarta</li>
-                    <li>SMK N 2 Depok Sleman</li>
-                    <li>SMP N 1 Muntilan</li>
+                    <?php
+                        $sql = "SELECT * FROM pendidikan";
+                        $result = $conn->query($sql);
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<li>".$row["sekolah"]."</li>";
+                        }
+                    ?>
                 </ul>
             </div>
             <div class="col-2" style="text-align: center;">
@@ -75,27 +90,26 @@
                 <p style="font-size: 25px;">Skill    :</p>
                 <hr style="margin-top: -1em;">
                 <ul style="margin-left: -0.5em;">
-                   <li>Network Admin</li> 
-                   <li>Server Admin</li>
-                   <li>Web Development</li>
-                   <li>Docker Container</li>
-                   <li>AWS Cloud</li>
-                   <li>Bash Scripting</li>
+                    <?php
+                        $sql = "SELECT * FROM skill";
+                        $result = $conn->query($sql);
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<li>".$row["skill"]."</li>";
+                        }
+                    ?>
                 </ul>
                 <p style="font-size: 25px;">Certification</p>
                 <hr style="margin-top: -1em;">
                 <ul style="margin-left: -0.5em;">
-                   <li>MTCNA</li> 
-                   <li>MTCRE</li>
-                   <li>MTCTCE</li>
-                   <li>MTCWE</li>
-                   <li>MTCUME</li>
-                   <li>Cloud Practitioner Engineer</li>
-                   <li>Architecting on AWS</li>
-                   <li>Dicoding : Visualisasi Data</li>
-                   <li>Dicoding : Dasar Pemrograman JavaScript</li>
-                   <li>Dicoding : Dasar Pemrograman Web</li>
-                   <li>Dicoding : Belajar Aplikasi Back-End Pemula</li>
+                    <?php
+                        $sql = "SELECT * FROM certification";
+                        $result = $conn->query($sql);
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<li>".$row["certification"]."</li>";
+                        }
+                    ?>
                 </ul>
             </div>
         </div>
